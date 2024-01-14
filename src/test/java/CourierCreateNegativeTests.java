@@ -21,7 +21,7 @@ public class CourierCreateNegativeTests {
     @Test
     @DisplayName("Создание курьера без логина")
     @Description("Создаем курьера без заполнения обязательного поля логин")
-    public void CourierWithoutLogin () {
+    public void courierWithoutLogin () {
         String password = CourierUser.randomPassword();
 
         CourierUser request = new CourierUser();
@@ -34,7 +34,7 @@ public class CourierCreateNegativeTests {
     @Test
     @DisplayName("Создание курьера без пароля")
     @Description("Создаем курьера без заполнения обязательного поля пароль")
-    public void CourierWithoutPassword () {
+    public void courierWithoutPassword () {
         String login = CourierUser.randomLogin();
 
         CourierUser request = new CourierUser();
@@ -48,7 +48,7 @@ public class CourierCreateNegativeTests {
     @Test
     @DisplayName("Создание курьера с существующим логином")
     @Description("Создаем курьера с логином, который уже зарегистрирован в системе")
-    public void DoubleCourierCreationError409 () {
+    public void doubleCourierCreationError409 () {
         String login = CourierUser.randomLogin();
         String password = CourierUser.randomPassword();
 

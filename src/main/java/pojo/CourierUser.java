@@ -1,5 +1,7 @@
 package pojo;
 
+import client.CourierDelete;
+import client.CourierLogin;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -82,6 +84,35 @@ public class CourierUser {
 
     public void setId(String login) {
         this.id = id;
+    }
+
+    @Step("Отправляем запрос на удаление курьера")
+    public static void deleteOfCourier(CourierUser userForDelete) {
+        CourierLogin courierLogin = new CourierLogin();
+
+        Response apiLogin = courierLogin.login(userForDelete);
+        String id = CourierLogin.receiveId(apiLogin);
+
+        CourierUser requestForDelete = new CourierUser(id);
+        CourierDelete courierDelete = new CourierDelete();
+
+        Response apiDelete = courierDelete.delete(requestForDelete);
+    }
+
+    @Step("Отправляем запрос на удаление курьера и проверяем успешный ответ ОК и статус 200")
+    public static void deleteOfCourierWithStatusCheck(CourierUser userForDelete) {
+        CourierLogin courierLogin = new CourierLogin();
+
+        Response apiLogin = courierLogin.login(userForDelete);
+        String id = CourierLogin.receiveId(apiLogin);
+
+        CourierUser requestForDelete = new CourierUser(id);
+        CourierDelete courierDelete = new CourierDelete();
+
+        Response apiDelete = courierDelete.delete(requestForDelete);
+        apiDelete.then().body("ok", equalTo(true))
+                .and()
+                .statusCode(200);
     }
 
     }

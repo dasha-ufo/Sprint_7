@@ -56,7 +56,7 @@ public class OrderCreateTests {
   @Test
   @DisplayName("Создание заказа с разными наборами данных")
   @Description("Создаем три типа заказов: с указанием одного цвета, с указанием двух цветов, без указания цветов")
-    public void CreateOrder() {
+    public void createOrder() {
     Order order = new Order(firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment, color);
     Response apiResponse = orderCreate.createOrder(order);
       checkSuccessResponceForCreateOrder(apiResponse);

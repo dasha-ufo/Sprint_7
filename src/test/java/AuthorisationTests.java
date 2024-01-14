@@ -1,4 +1,5 @@
 import client.CourierCreate;
+import client.CourierDelete;
 import client.CourierLogin;
 import com.google.gson.Gson;
 import io.qameta.allure.Description;
@@ -29,7 +30,7 @@ public class AuthorisationTests {
     @Test
     @DisplayName("Успешная авторизация")
     @Description("Успешная авторизация с указанием верного логина и пароля")
-    public void CourierAuthSuccess () {
+    public void courierAuthSuccess () {
         String login = RandomStringUtils.randomAlphabetic(6);
         String password = CourierUser.randomPassword();
 
@@ -40,12 +41,14 @@ public class AuthorisationTests {
         Response createCourier = courierCreate.create(request);
         Response apiResponse = courierLogin.login(request);
         checkStatusAndBodyOfSuccessLogin(apiResponse);
+
+        CourierUser.deleteOfCourier(request);
     }
 
     @Test
     @DisplayName("Авторизация без регистрации курьера")
     @Description("Авторизация под логином и паролем, который ранее не был зарегистрирован")
-    public void CourierAuthNonExist () {
+    public void courierAuthNonExist () {
         String login = RandomStringUtils.randomAlphabetic(6);
         String password = CourierUser.randomPassword();
 
@@ -60,7 +63,7 @@ public class AuthorisationTests {
     @Test
     @DisplayName("Авторизация с неправильным паролем")
     @Description("Авторизация с указанием неправильного пароля")
-    public void CourierAuthWrongPassword () {
+    public void courierAuthWrongPassword () {
         String login = RandomStringUtils.randomAlphabetic(6);
         String password = CourierUser.randomPassword();
 
@@ -81,7 +84,7 @@ public class AuthorisationTests {
     @Test
     @DisplayName("Авторизация без пароля")
     @Description("Авторизация курьера без указания пароля")
-    public void CourierAuthWithoutPassword () {
+    public void courierAuthWithoutPassword () {
         String login = RandomStringUtils.randomAlphabetic(6);
 
         CourierUser request = new CourierUser();
@@ -94,7 +97,7 @@ public class AuthorisationTests {
     @Test
     @DisplayName("Авторизация без логина")
     @Description("Авторизация курьера без указания логина")
-    public void CourierAuthWithoutLogin () {
+    public void courierAuthWithoutLogin () {
         String password = CourierUser.randomPassword();
 
         CourierUser request = new CourierUser();
@@ -126,4 +129,5 @@ public class AuthorisationTests {
                     .statusCode(400);
 
         }
+
 }

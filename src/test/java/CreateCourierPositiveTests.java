@@ -27,23 +27,13 @@ public class CreateCourierPositiveTests {
 
     @After
     public void cleanUp() {
-        CourierLogin courierLogin = new CourierLogin();
-
-        Response apiLogin = courierLogin.login(userForDelete);
-        String id = CourierLogin.receiveId(apiLogin);
-
-        CourierUser requestForDelete = new CourierUser(id);
-        CourierDelete courierDelete = new CourierDelete();
-
-
-        Response apiDelete = courierDelete.delete(requestForDelete);
-        checkStatusOfDelete200(apiDelete);
+        CourierUser.deleteOfCourierWithStatusCheck(userForDelete);
     }
 
     @Test
     @DisplayName("Создание курьера")
     @Description("Создаем курьера со всеми заполненными полями")
-    public void CourierCreationSuccess () {
+    public void courierCreationSuccess () {
         CourierUser request = new CourierUser();
 
         request.setLogin(CourierUser.randomLogin());
@@ -58,7 +48,7 @@ public class CreateCourierPositiveTests {
     @Test
     @DisplayName("Создание курьера только с обязательными полями")
     @Description("Создаем курьера только с заполнением обязательных полей: логин и пароль")
-    public void CourierCreationSuccessOnlyNecessaryFields () {
+    public void courierCreationSuccessOnlyNecessaryFields () {
 
         CourierUser request = new CourierUser();
         request.setLogin(CourierUser.randomLogin());

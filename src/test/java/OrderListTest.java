@@ -3,11 +3,11 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import pojo.Order;
 
-import static org.hamcrest.Matchers.notNullValue;
 
 public class OrderListTest {
 
@@ -24,15 +24,15 @@ public class OrderListTest {
     @Test
     @DisplayName("Получить список заказов")
     @Description("Получаем список заказов без параметров в body по дефолтному запросу /api/v1/orders")
-    public void ReceiveOrdersList() {
+    public void receiveOrdersList() {
         Order order = new Order();
         Response apiResponse = orderCreate.receiveOrder(order);
-        checkResponseWithOrdersNotEmpty(apiResponse);
+        checkOrdersListIsNotEmpty(apiResponse);
     }
 
-    @Step("Проверяем, что статус поиска заказов 200 и тело содержит данные")
-    public void checkResponseWithOrdersNotEmpty(Response apiResponse) {
-            apiResponse.then().body(notNullValue())
+    @Step("Проверяем, что статус поиска заказов 200 и список заказов не пустой")
+    public void checkOrdersListIsNotEmpty(Response apiResponse) {
+            apiResponse.then().body("orders", Matchers.not(Matchers.empty()))
             .and()
                 .statusCode(200);
     }
