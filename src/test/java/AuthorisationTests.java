@@ -79,6 +79,7 @@ public class AuthorisationTests {
 
         Response apiResponse = courierLogin.login(requestForLogin);
         checkAuthorisationWithWrongFields(apiResponse);
+        CourierUser.deleteOfCourier(request);
     }
 
     @Test

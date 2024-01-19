@@ -59,6 +59,7 @@ public class CourierCreateNegativeTests {
         Response apiResponse = courierCreate.create(request);
         Response apiResponseError = courierCreate.create(request);
         checkStatusOfCreationIs409(apiResponseError);
+        CourierUser.deleteOfCourier(request);
     }
 
 

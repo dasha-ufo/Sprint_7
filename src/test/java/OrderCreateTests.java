@@ -40,6 +40,7 @@ public class OrderCreateTests {
     public static Object[][] setDifferentColour() {
         return new Object[][]{
                 {"Petr", "Petrov", "Mosselmash 59, kv 11", "1","8 800 555 3555", 6, "2024-01-01", "Hello, how are you",new String[] {"BLACK"}},
+                {"Vasilii", "Korolev", "Lenina 9, 01", "1","8 911 555 3555", 6, "2024-01-01", "Hello, how are you",new String[] {"GREY"}},
         {"Petr", "Petrov", "Mosselmash 59, kv 11", "2","7 700 555 3555", 6, "2024-03-01", "Piu piu piu", new String[] {"BLACK", "GREY"}},
                 {"Agnessa", "Ivanova", "Tsvetochnaya 1, kv 2", "3","8 800 555 3555", 11, "2024-02-01", "Hello, how are you", new String[0]},
         };
